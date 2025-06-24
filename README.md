@@ -114,7 +114,11 @@ Name of the env file name to pass to `fastlane --env`
 
 ### `ios-app-id`
 
-The iOS application identifier; useful to sync a specific provisioning profile
+The iOS application identifier(s). Can be a single bundle ID or a comma-separated list of bundle IDs. When multiple bundle IDs are provided:
+- All bundle IDs will be used for Match to sync provisioning profiles
+- The first bundle ID in the list will be used as the primary identifier for build number increment and TestFlight upload
+
+Example: `"com.example.app"` or `"com.example.app,com.example.app.extension"`
 
 ## Contributions Welcome!
 

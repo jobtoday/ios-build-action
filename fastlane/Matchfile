@@ -4,7 +4,9 @@ storage_mode("git")
 
 type(ENV["MATCH_BUILD_TYPE"]) # The default type, can be: appstore, adhoc, enterprise or development
 
-app_identifier(ENV["IOS_APP_ID"]) if ENV["IOS_APP_ID"]
+# Support comma-separated list of bundle IDs
+app_identifiers = ENV["IOS_APP_ID"] ? ENV["IOS_APP_ID"].split(',').map(&:strip) : []
+app_identifier(app_identifiers) if app_identifiers.any?
 
 keychain_name('ios-build.keychain')
 keychain_password('12345678')
