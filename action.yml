@@ -98,6 +98,9 @@ inputs:
   ios-app-id:
     description: "The iOS application identifier; useful to sync a specific provisioning profile"
     required: false
+  sentry-auth-token:
+    description: "Sentry auth token"
+    required: false
 runs:
   using: "node16"
   main: "dist/index.js"
