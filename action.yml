@@ -8,11 +8,11 @@ inputs:
   upload-to-testflight:
     description: "Upload to TestFlight."
     required: false
-    default: false
+    default: "false"
   increment-build-number:
     description: "Increment build number."
     required: false
-    default: false
+    default: "false"
   project-path:
     description: "Project path"
     required: true
@@ -78,7 +78,7 @@ inputs:
   browserstack-upload:
     description: "Boolean to tell the Action to upload the .ipa to Browserstack App Live after the build."
     required: false
-    default: false
+    default: "false"
   browserstack-username:
     description: "Browserstack username (required if browserstack-upload == true)"
     required: false
@@ -101,6 +101,10 @@ inputs:
   sentry-auth-token:
     description: "Sentry auth token"
     required: false
+  firebase-upload:
+    description: "Boolean to tell the Action to upload the .ipa to Firebase App Distribution after the build."
+    required: false
+    default: "false"
 runs:
   using: "node16"
   main: "dist/index.js"

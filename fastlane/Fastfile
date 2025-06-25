@@ -34,7 +34,7 @@ platform :ios do
     primary_bundle_id = bundle_ids.first
 
     use_workspace = !ENV['WORKSPACE_PATH'].empty?
-    
+
     # Match with all bundle IDs
     if bundle_ids.any?
       bundle_ids.each do |bundle_id|
@@ -69,7 +69,10 @@ platform :ios do
       export_options: bundle_ids.any? ? {
         provisioningProfiles: bundle_ids.each_with_object({}) do |bundle_id, profiles|
           profiles[bundle_id] = "match #{ENV['MATCH_BUILD_TYPE'].capitalize} #{bundle_id}"
-        end
+        end,
+        # manifest: {
+          # appUrl: ""
+        # }
       } : nil
     )
 
@@ -79,6 +82,18 @@ platform :ios do
         browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
         file_path: ENV["OUTPUT_PATH"]
       )
+    end
+
+    if ENV["FIREBASE_UPLOAD"] == 'true'
+      service_credentials_filename = "firebase.json"
+      File.write(service_credentials_filename, ENV["FIREBASE_SERVICE_CREDENTIALS_FILE"])
+      firebase_app_distribution(
+        # browserstack_username: ENV["BROWSERSTACK_USERNAME"],
+        # browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
+        # file_path: ENV["OUTPUT_PATH"],
+        service_credentials_file: service_credentials_filename
+      )
+      File.delete(service_credentials_filename)
     end
 
     if ENV["TESTFLIGHT_UPLOAD"] == 'true' && primary_bundle_id
