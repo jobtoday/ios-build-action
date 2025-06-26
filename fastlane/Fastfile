@@ -85,14 +85,9 @@ platform :ios do
     end
 
     if ENV["FIREBASE_UPLOAD"] == 'true'
-      service_credentials_filename = File.join(File.dirname(ENV['OUTPUT_PATH']), "firebase.json")
-      say("Writing Firebase service credentials: #{ENV['FIREBASE_SERVICE_CREDENTIALS_FILE']} to #{service_credentials_filename}")
-      File.write(service_credentials_filename, ENV["FIREBASE_SERVICE_CREDENTIALS_FILE"])
-      say("Read back the file - #{File.read(service_credentials_filename)}")
       firebase_app_distribution(
-        service_credentials_file: service_credentials_filename
+        service_credentials_json_data: ENV['FIREBASE_SERVICE_CREDENTIALS_FILE']
       )
-      File.delete(service_credentials_filename)
     else
       say("Not uploading to Firebase because FIREBASE_UPLOAD is set to", ENV["FIREBASE_UPLOAD"])
     end
