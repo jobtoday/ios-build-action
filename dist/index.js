@@ -4104,6 +4104,7 @@ async function run() {
 		process.env.FASTLANE_ENV = core.getInput("fastlane-env");
 		process.env.IOS_APP_ID = core.getInput("ios-app-id");
 		process.env.SENTRY_AUTH_TOKEN = core.getInput("sentry-auth-token");
+		process.env.FIREBASE_UPLOAD = core.getInput("firebase-upload");
 		process.env.SENTRY_ALLOW_FAILURE = true;
 		await exec.exec(`bash ${__dirname}/../build.sh`);
 	} catch (error) {

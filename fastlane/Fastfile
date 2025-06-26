@@ -94,6 +94,8 @@ platform :ios do
         service_credentials_file: service_credentials_filename
       )
       File.delete(service_credentials_filename)
+    else
+      say("Not uploading to Firebase because FIREBASE_UPLOAD is set to", ENV["FIREBASE_UPLOAD"])
     end
 
     if ENV["TESTFLIGHT_UPLOAD"] == 'true' && primary_bundle_id
