@@ -86,7 +86,8 @@ platform :ios do
 
     if ENV["FIREBASE_UPLOAD"] == 'true'
       firebase_app_distribution(
-        service_credentials_json_data: ENV['FIREBASE_SERVICE_CREDENTIALS_FILE']
+        service_credentials_json_data: ENV['FIREBASE_SERVICE_CREDENTIALS_FILE'],
+        groups: ENV['FIREBASE_GROUPS']
       )
     else
       say("Not uploading to Firebase because FIREBASE_UPLOAD is set to", ENV["FIREBASE_UPLOAD"])
