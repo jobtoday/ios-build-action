@@ -85,12 +85,9 @@ platform :ios do
     end
 
     if ENV["FIREBASE_UPLOAD"] == 'true'
-      service_credentials_filename = File.join(ENV['OUTPUT_PATH'], "firebase.json")
+      service_credentials_filename = File.join(File.dirname(ENV['OUTPUT_PATH']), "firebase.json")
       File.write(service_credentials_filename, ENV["FIREBASE_SERVICE_CREDENTIALS_FILE"])
       firebase_app_distribution(
-        # browserstack_username: ENV["BROWSERSTACK_USERNAME"],
-        # browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
-        # file_path: ENV["OUTPUT_PATH"],
         service_credentials_file: service_credentials_filename
       )
       File.delete(service_credentials_filename)
